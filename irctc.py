@@ -22,14 +22,15 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 
 
 # Initialize driver
-s = Service(ChromeDriverManager().install())
+s = Service('C:/Users/Shashank Rai/OneDrive/Desktop/chromedriver.exe')
 driver = webdriver.Chrome(service=s, options=options)
 
 # Open IRCTC login page
 driver.get('https://www.irctc.co.in/nget/train-search')
-time.sleep(1)
+time.sleep(5)
 menu=driver.find_element(By.XPATH,value="/html/body/app-root/app-home/div[1]/app-header/div[1]/div[2]")
 menu.click()
+time.sleep(2)
 # Click on login button
 login_button = driver.find_element(By.XPATH, "/html/body/app-root/app-home/div[1]/app-header/div[3]/p-sidebar/div/nav/div/label")
 login_button.click()
@@ -38,11 +39,11 @@ time.sleep(1)
 # Enter username
 username_input = driver.find_element(By.XPATH, "/html/body/app-root/app-home/div[3]/app-login/p-dialog[1]/div/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[2]/input")
 username_input.send_keys("Raishashnk")  # Replace with your IRCTC username
-
+time.sleep(2)
 # Enter password
 password_input = driver.find_element(By.XPATH, "/html/body/app-root/app-home/div[3]/app-login/p-dialog[1]/div/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[3]/input")
 password_input.send_keys("Srk275305@")  # Replace with your IRCTC password
-time.sleep(10)
+time.sleep(5)
 
 captcha_element = driver.find_element(By.XPATH, "/html/body/app-root/app-home/div[3]/app-login/p-dialog[1]/div/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[5]/div/app-captcha/div/div/div[2]/span[1]/img")
 # Take a screenshot of the CAPTCHA and save it
@@ -59,7 +60,6 @@ cv2.imwrite("processed_captcha.png", thresh)
 captcha_text = pytesseract.image_to_string(thresh, config='--psm 6').strip()
 print(f"Extracted CAPTCHA: {captcha_text}")
 
-# Pause to manually enter captcha (optional)
 captcha_input = driver.find_element(By.XPATH, "/html/body/app-root/app-home/div[3]/app-login/p-dialog[1]/div/div/div[2]/div[2]/div/div[2]/div/div[2]/form/div[5]/div/app-captcha/div/div/input")
 captcha_input.send_keys(captcha_text)
 
@@ -85,7 +85,7 @@ date_input = driver.find_element(By.XPATH, "/html/body/app-root/app-home/div[3]/
 date_input.click()
 date_input.send_keys(Keys.CONTROL + "a")  # Select all text
 date_input.send_keys(Keys.DELETE)         # Clear the input
-date_input.send_keys("05/03/2025")
+date_input.send_keys("20/03/2025")
 
 
 dropdown = driver.find_element(By.XPATH, "/html/body/app-root/app-home/div[3]/div/app-main-page/div/div/div[1]/div[2]/div[1]/app-jp-input/div/form/div[3]/div/div/p-dropdown/div")
